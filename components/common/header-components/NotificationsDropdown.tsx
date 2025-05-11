@@ -2,55 +2,82 @@
 
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Bell } from 'lucide-react';
+import { useState } from 'react';
 
 export function NotificationsDropdown() {
+  const [notifications, setNotifications] = useState([
+    {
+      id: 1,
+      type: 'reward',
+      title: 'New referral reward',
+      message: 'You received 0.05 ETH from user0x12...89f3',
+      time: '2 hours ago',
+      read: false
+    },
+    {
+      id: 2,
+      type: 'level',
+      title: 'Level upgrade',
+      message: 'Your referral level increased to Level 2',
+      time: '1 day ago',
+      read: false
+    },
+    {
+      id: 3,
+      type: 'welcome',
+      title: 'Welcome to Patara Referrals!',
+      message: 'Start referring friends and earn crypto rewards',
+      time: '3 days ago',
+      read: true
+    }
+  ]);
+
+  const handleMarkAllAsRead = () => {
+    setNotifications(prevNotifications =>
+      prevNotifications.map(notification => ({
+        ...notification,
+        read: true
+      }))
+    );
+  };
+
+  const unreadCount = notifications.filter(n => !n.read).length;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="icon" className="relative p-2 bg-zinc-800 hover:bg-zinc-700 text-white">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
-            <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-          </svg>
-          <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+          <Bell className="h-5 w-5" />
+          {unreadCount > 0 && (
+            <span className="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+          )}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="bg-zinc-900 border-zinc-800 text-white p-4 w-80">
         <div className="flex items-center justify-between mb-2">
           <h3 className="font-medium">Notifications</h3>
-          <Button variant="ghost" size="sm" className="text-xs text-blue-400 hover:text-blue-300">
+          <Button 
+            variant="ghost" 
+            size="sm" 
+            className="text-xs text-blue-400 hover:text-blue-300"
+            onClick={handleMarkAllAsRead}
+          >
             Mark all as read
           </Button>
         </div>
 
         <div className="space-y-4 mt-4 max-h-[300px] overflow-auto">
-          <div className="border-l-2 border-blue-500 pl-4 py-1">
-            <p className="text-sm font-medium">New referral reward</p>
-            <p className="text-xs text-zinc-400">You received 0.05 ETH from user0x12...89f3</p>
-            <p className="text-xs text-zinc-500 mt-1">2 hours ago</p>
-          </div>
-
-          <div className="border-l-2 border-blue-500 pl-4 py-1">
-            <p className="text-sm font-medium">Level upgrade</p>
-            <p className="text-xs text-zinc-400">Your referral level increased to Level 2</p>
-            <p className="text-xs text-zinc-500 mt-1">1 day ago</p>
-          </div>
-
-          <div className="border-l-2 border-zinc-700 pl-4 py-1">
-            <p className="text-sm font-medium">Welcome to Patara Referrals!</p>
-            <p className="text-xs text-zinc-400">Start referring friends and earn crypto rewards</p>
-            <p className="text-xs text-zinc-500 mt-1">3 days ago</p>
-          </div>
+          {notifications.map((notification) => (
+            <div 
+              key={notification.id}
+              className={`border-l-2 ${notification.read ? 'border-zinc-700' : 'border-blue-500'} pl-4 py-1`}
+            >
+              <p className="text-sm font-medium">{notification.title}</p>
+              <p className="text-xs text-zinc-400">{notification.message}</p>
+              <p className="text-xs text-zinc-500 mt-1">{notification.time}</p>
+            </div>
+          ))}
         </div>
 
         <div className="mt-4 pt-4 border-t border-zinc-800">
