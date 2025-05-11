@@ -64,7 +64,6 @@ export function Header({
               </button>
             }
 
-
             <Link href="/" className="block max-w-[150px]">
               <img
                 src="/logo/patara-logo.png"

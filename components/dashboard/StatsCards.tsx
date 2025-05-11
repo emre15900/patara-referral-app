@@ -11,9 +11,8 @@ export function StatsCards() {
   
   return (
     <div className="grid grid-cols-1 gap-4">
-      {/* Total Earned Fee */}
       <motion.div 
-        className="bg-zinc-900 rounded-lg border border-zinc-800 p-4"
+        className="bg-zinc-900 rounded-lg p-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
@@ -33,9 +32,8 @@ export function StatsCards() {
         </div>
       </motion.div>
       
-      {/* Unclaimed Fee */}
       <motion.div 
-        className="bg-zinc-900 rounded-lg border border-zinc-800 p-4"
+        className="bg-zinc-900 rounded-lg p-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 0.1 }}
@@ -64,9 +62,8 @@ export function StatsCards() {
         </div>
       </motion.div>
       
-      {/* Total Referral Points */}
       <motion.div 
-        className="bg-zinc-900 rounded-lg border border-zinc-800 p-4"
+        className="bg-zinc-900 rounded-lg p-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 0.2 }}
@@ -91,9 +88,8 @@ export function StatsCards() {
         </div>
       </motion.div>
       
-      {/* Referrals */}
       <motion.div 
-        className="bg-zinc-900 rounded-lg border border-zinc-800 p-4"
+        className="bg-zinc-900 rounded-lg p-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: 0.3 }}

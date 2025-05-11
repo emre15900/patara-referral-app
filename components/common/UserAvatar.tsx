@@ -13,7 +13,7 @@ export function UserAvatar({ size = 'sm' }: UserAvatarProps) {
 
   return (
     <div 
-      className={`${sizeClasses[size]} rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold overflow-hidden`}
+      className={`${sizeClasses[size]} rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold overflow-hidden`}
     >
       <img
         src="/avatars/avatar.png"

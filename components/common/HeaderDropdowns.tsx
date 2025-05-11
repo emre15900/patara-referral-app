@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { UserAvatar } from '@/components/common/UserAvatar';
+import { ChevronDown } from 'lucide-react';
 
 export function NotificationsDropdown() {
   return (
@@ -174,16 +175,16 @@ export function UserDropdown() {
     try {
       await navigator.clipboard.writeText(referralLink);
       setCopyStatus('Copied!');
-      
+
       toast.success("Referral link copied to clipboard!", {
         description: "Share with your friends to earn rewards",
         duration: 3000,
       });
-      
+
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
-      
+
       timeoutRef.current = setTimeout(() => {
         setCopyStatus('Copy');
         timeoutRef.current = null;
@@ -191,7 +192,7 @@ export function UserDropdown() {
     } catch (err) {
       console.error('Failed to copy: ', err);
       setCopyStatus('Failed!');
-      
+
       toast.error("Failed to copy link", {
         description: "Please try again",
         duration: 3000,
@@ -202,10 +203,17 @@ export function UserDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="rounded-full overflow-hidden p-0 bg-zinc-800 hover:bg-zinc-700 w-10 h-10">
-          <UserAvatar />
+        <Button
+          variant="ghost"
+          size="lg"
+          className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg px-1.5 py-1"
+        >
+          <UserAvatar size="sm" />
+          <span className="text-sm font-medium">@patara.sui</span>
+          <ChevronDown size={16} />
         </Button>
       </DropdownMenuTrigger>
+      
       <DropdownMenuContent align="end" className="bg-zinc-900 border-zinc-800 text-white p-4 w-80">
         <div className="flex items-center gap-3 mb-2">
           <UserAvatar size="md" />
@@ -218,9 +226,9 @@ export function UserDropdown() {
         <div className="py-3 border-t border-b border-zinc-800 my-3">
           <div className="flex items-center justify-between mb-2">
             <p className="text-sm text-zinc-400">Your Referral Link</p>
-            <Button 
-              variant="ghost" 
-              size="sm" 
+            <Button
+              variant="ghost"
+              size="sm"
               className="text-xs text-blue-400 hover:text-blue-300"
               onClick={copyToClipboard}
             >
