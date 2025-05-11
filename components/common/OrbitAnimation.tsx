@@ -50,7 +50,7 @@ export function OrbitAnimation() {
       <div className="absolute w-16 h-16 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-50">
         {!imageError ? (
           <Image 
-            src="/images/patara-logo.png" 
+            src="/logo/patara-logo.png" 
             alt="Patara" 
             width={64} 
             height={64}

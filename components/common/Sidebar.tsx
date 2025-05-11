@@ -88,7 +88,7 @@ export function Sidebar() {
             <a href="/" className="flex items-center gap-2">
               <div className="w-10 h-10">
                 <Image
-                  src="/images/patara-logo.png"
+                  src="/logo/patara-logo.png"
                   alt="Patara Logo"
                   width={40}
                   height={40}
@@ -125,11 +125,10 @@ export function Sidebar() {
         <div className="p-4 border-b border-zinc-800">
           <Link href="/" className="block max-w-[150px]">
             <img
-              src="/images/patara-logo.png"
+              src="/logo/patara-favicon.png"
               alt="Patara Logo"
-              width={150}
+              width={50}
               height={40}
-              style={{ width: '100%', height: 'auto' }}
             />
           </Link>
         </div>
