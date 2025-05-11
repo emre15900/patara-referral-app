@@ -3,12 +3,16 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { SearchBar } from '@/components/SearchBar';
 import { OrbitAnimation } from '@/components/OrbitAnimation';
+import { BackgroundAnimation } from '@/components/BackgroundAnimation';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white">
+      {/* Animasyonlu Arka Plan */}
+      <BackgroundAnimation />
+      
       {/* Navigation */}
-      <header className="border-b border-zinc-800">
+      <header className="border-b border-zinc-800 relative z-10">
         <div className="container max-w-screen-xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button className="p-2 -ml-2">
@@ -46,18 +50,6 @@ export default function Home() {
 
       {/* Hero Section */}
       <main className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-center relative overflow-hidden">
-        {/* Background floating icons */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-[15%] left-[15%] w-12 h-12 rounded-full bg-zinc-800 opacity-20 blur-sm">P</div>
-          <div className="absolute top-[25%] right-[15%] w-12 h-12 rounded-full bg-zinc-800 opacity-20 blur-sm">M</div>
-          <div className="absolute bottom-[25%] left-[15%] w-12 h-12 rounded-full bg-zinc-800 opacity-20 blur-sm">F</div>
-          <div className="absolute bottom-[30%] right-[20%] w-12 h-12 rounded-full bg-zinc-800 opacity-20 blur-sm">W</div>
-          <div className="absolute bottom-[15%] left-[48%] w-12 h-12 rounded-full bg-zinc-800 opacity-20 blur-sm">G</div>
-          <div className="absolute top-[40%] left-[25%] w-12 h-12 rounded-full bg-zinc-800 opacity-20 blur-sm">S</div>
-          <div className="absolute top-[35%] right-[25%] w-12 h-12 rounded-full bg-zinc-800 opacity-20 blur-sm">A</div>
-          <div className="absolute bottom-[40%] right-[35%] w-12 h-12 rounded-full bg-zinc-800 opacity-20 blur-sm">C</div>
-        </div>
-        
         <div className="max-w-md w-full bg-zinc-900/60 backdrop-blur-sm p-12 rounded-lg border border-zinc-800 shadow-xl z-10">
           <div className="flex flex-col items-center text-center">
             <div className="mb-10 relative">

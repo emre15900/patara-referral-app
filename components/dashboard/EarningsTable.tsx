@@ -5,7 +5,6 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 
-// Mock data for the table
 const transactionData = Array(10).fill(null).map((_, i) => ({
   id: i + 1,
   account: '0x1f20e_e2026',
