@@ -18,7 +18,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
       <Toaster 
         position="top-right" 
-        closeButton
         richColors
         expand={false}
         duration={3000}

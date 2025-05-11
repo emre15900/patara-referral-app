@@ -17,7 +17,7 @@ export function MainLayout({ children }: MainLayoutProps) {
       <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
       
       <div className="relative z-10 transition-none">
-        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} isAuthenticated={true} />
         
         <main className="container-fluid mx-auto sm:px-6 py-8">
           {children}

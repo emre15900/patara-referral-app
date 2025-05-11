@@ -20,7 +20,6 @@ export function OrbitAnimation() {
   
   return (
     <div className="relative w-64 h-64">
-      {/* Orbital rings with flowing animation */}
       <div className="absolute inset-0">
         {[...Array(4)].map((_, i) => (
           <motion.div
@@ -46,7 +45,6 @@ export function OrbitAnimation() {
         ))}
       </div>
 
-      {/* Center Patara logo */}
       <div className="absolute w-16 h-16 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-50">
         {!imageError ? (
           <Image 

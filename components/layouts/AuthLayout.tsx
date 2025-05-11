@@ -17,7 +17,7 @@ export function AuthLayout({ children }: AuthLayoutProps) {
       <BackgroundAnimation />
       <Sidebar isOpen={sidebarOpen} setIsOpen={setSidebarOpen} />
       
-      <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+      <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} isAuthenticated={false} />
       
       <main className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-center relative overflow-hidden">
         {children}

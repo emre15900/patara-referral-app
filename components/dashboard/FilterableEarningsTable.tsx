@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator
 } from '@/components/ui/dropdown-menu';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface TransactionType {
   id: number;
@@ -23,7 +24,7 @@ interface TransactionType {
   earned_fee: string;
   time: string;
   type: string;
-  [key: string]: string | number; 
+  [key: string]: string | number;
 }
 
 const generateTransactionData = (count: number): TransactionType[] => Array(count).fill(null).map((_, i) => ({
@@ -41,6 +42,8 @@ const generateTransactionData = (count: number): TransactionType[] => Array(coun
 const transactionData = generateTransactionData(40);
 
 export function FilterableEarningsTable() {
+  const [imageError, setImageError] = useState(false);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [entriesPerPage, setEntriesPerPage] = useState(10);
   const [search, setSearch] = useState('');
@@ -353,9 +356,19 @@ export function FilterableEarningsTable() {
               currentEntries.map((transaction) => (
                 <TableRow key={transaction.id} className="border-b border-zinc-800 hover:bg-zinc-800/50">
                   <TableCell className="flex items-center gap-2">
-                    <div className="bg-gradient-to-br from-blue-500 to-purple-500 w-8 h-8 rounded-full flex items-center justify-center">
-                      <span className="text-white text-xs">P</span>
-                    </div>
+                    {!imageError ? (
+                      <Image
+                        src="/images/orbit-logo.png"
+                        alt="Patara"
+                        width={40}
+                        height={40}
+                        onError={() => setImageError(true)}
+                      />
+                    ) : (
+                      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-2xl">
+                        P
+                      </div>
+                    )}
                     <span>{transaction.account}</span>
                   </TableCell>
                   <TableCell>{transaction.amount_in}</TableCell>
@@ -365,8 +378,8 @@ export function FilterableEarningsTable() {
                   <TableCell>{transaction.earned_fee}</TableCell>
                   <TableCell>
                     <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${transaction.type === 'swap' ? 'bg-blue-500/20 text-blue-400' :
-                        transaction.type === 'buy' ? 'bg-green-500/20 text-green-400' :
-                          'bg-red-500/20 text-red-400'
+                      transaction.type === 'buy' ? 'bg-green-500/20 text-green-400' :
+                        'bg-red-500/20 text-red-400'
                       }`}>
                       {transaction.type.toLocaleUpperCase()}
                     </span>
@@ -431,8 +444,8 @@ export function FilterableEarningsTable() {
                 key={page}
                 variant={page === currentPage ? "default" : "outline"}
                 className={`h-8 w-8 ${page === currentPage
-                    ? "bg-zinc-700 text-white"
-                    : "bg-zinc-800 border-zinc-700 text-zinc-400 hover:bg-zinc-700"
+                  ? "bg-zinc-700 text-white"
+                  : "bg-zinc-800 border-zinc-700 text-zinc-400 hover:bg-zinc-700"
                   }`}
                 onClick={() => setCurrentPage(page)}
               >
@@ -444,8 +457,8 @@ export function FilterableEarningsTable() {
               <Button
                 variant={currentPage === 1 ? "default" : "outline"}
                 className={`h-8 w-8 ${currentPage === 1
-                    ? "bg-zinc-700 text-white"
-                    : "bg-zinc-800 border-zinc-700 text-zinc-400 hover:bg-zinc-700"
+                  ? "bg-zinc-700 text-white"
+                  : "bg-zinc-800 border-zinc-700 text-zinc-400 hover:bg-zinc-700"
                   }`}
                 onClick={() => setCurrentPage(1)}
               >
@@ -469,8 +482,8 @@ export function FilterableEarningsTable() {
                     key={page}
                     variant={page === currentPage ? "default" : "outline"}
                     className={`h-8 w-8 ${page === currentPage
-                        ? "bg-zinc-700 text-white"
-                        : "bg-zinc-800 border-zinc-700 text-zinc-400 hover:bg-zinc-700"
+                      ? "bg-zinc-700 text-white"
+                      : "bg-zinc-800 border-zinc-700 text-zinc-400 hover:bg-zinc-700"
                       }`}
                     onClick={() => setCurrentPage(page)}
                   >
@@ -492,8 +505,8 @@ export function FilterableEarningsTable() {
               <Button
                 variant={currentPage === totalPages ? "default" : "outline"}
                 className={`h-8 w-8 ${currentPage === totalPages
-                    ? "bg-zinc-700 text-white"
-                    : "bg-zinc-800 border-zinc-700 text-zinc-400 hover:bg-zinc-700"
+                  ? "bg-zinc-700 text-white"
+                  : "bg-zinc-800 border-zinc-700 text-zinc-400 hover:bg-zinc-700"
                   }`}
                 onClick={() => setCurrentPage(totalPages)}
               >
