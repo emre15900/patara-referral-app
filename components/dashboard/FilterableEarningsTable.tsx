@@ -425,19 +425,7 @@ export function FilterableEarningsTable() {
           </DropdownMenu>
         </div>
 
-        <div className="flex items-center gap-1">
-          <Button
-            variant="outline"
-            size="icon"
-            className="h-8 w-8 bg-zinc-800 border-zinc-700 text-zinc-400 hover:bg-zinc-700"
-            onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-            disabled={currentPage === 1}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="m15 18-6-6 6-6" />
-            </svg>
-          </Button>
-
+        <div className="flex items-center justify-center gap-1 flex-1">
           {totalPages <= 5 ? (
             pageNumbers.map((page) => (
               <Button
@@ -514,6 +502,20 @@ export function FilterableEarningsTable() {
               </Button>
             </>
           )}
+        </div>
+
+        <div className="flex items-center gap-1">
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-8 w-8 bg-zinc-800 border-zinc-700 text-zinc-400 hover:bg-zinc-700"
+            onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+            disabled={currentPage === 1}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+          </Button>
 
           <Button
             variant="outline"
