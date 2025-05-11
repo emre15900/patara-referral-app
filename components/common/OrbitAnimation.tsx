@@ -1,62 +1,68 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
+const generateCircularPositions = (count: number) => {
+  return Array.from({ length: count }, (_, index) => {
+    const angle = (index / count) * 2 * Math.PI;
+    const x = 50 + 45 * Math.sin(angle);
+    const y = 50 + 45 * Math.cos(angle);
+    return { x, y };
+  });
+};
+
+const positions = generateCircularPositions(8);
+
 const platformIcons = [
-  { id: 'P', gradient: 'from-red-300/90 to-pink-300/90', position: { top: '5%', left: '50%' } },
-  { id: 'M', gradient: 'from-yellow-200/90 to-amber-200/90', position: { top: '15%', right: '15%' } },
-  { id: 'F', gradient: 'from-green-300/90 to-emerald-300/90', position: { top: '30%', left: '10%' } },
-  { id: 'A', gradient: 'from-orange-200/90 to-amber-200/90', position: { top: '30%', right: '10%' } },
-  { id: 'S', gradient: 'from-purple-300/90 to-violet-300/90', position: { top: '70%', left: '10%' } },
-  { id: 'W', gradient: 'from-blue-300/90 to-indigo-300/90', position: { top: '70%', right: '10%' } },
-  { id: 'G', gradient: 'from-yellow-300/90 to-amber-300/90', position: { top: '85%', left: '30%' } },
-  { id: 'C', gradient: 'from-rose-300/90 to-pink-300/90', position: { bottom: '5%', left: '50%' } },
+  { id: 'P', gradient: 'from-red-300 to-pink-300', position: positions[0] },
+  { id: 'M', gradient: 'from-yellow-200 to-amber-200', position: positions[1] },
+  { id: 'F', gradient: 'from-green-300 to-emerald-300', position: positions[2] },
+  { id: 'S', gradient: 'from-purple-300 to-violet-300', position: positions[3] },
+  { id: 'G', gradient: 'from-orange-300 to-amber-300', position: positions[4] },
+  { id: 'C', gradient: 'from-rose-300 to-pink-300', position: positions[5] },
+  { id: 'W', gradient: 'from-blue-300 to-indigo-300', position: positions[6] },
+  { id: 'A', gradient: 'from-orange-200 to-amber-200', position: positions[7] },
 ];
 
 export function OrbitAnimation() {
   const [imageError, setImageError] = useState(false);
   
   return (
-    <div className="relative w-64 h-64">
+    <div className="relative w-64 h-64 flex items-center justify-center">
+      <div className="absolute inset-0 rounded-full bg-zinc-900"></div>
+      
       <div className="absolute inset-0">
-        {[...Array(4)].map((_, i) => (
+        {[...Array(5)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute inset-0 rounded-full border-2 border-zinc-700/20 overflow-hidden"
-            style={{ scale: 1 - i * 0.1 }}
-          >
-            <motion.div 
-              className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-cyan-500/20 to-pink-500/10 opacity-30"
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-              }}
-              transition={{
-                duration: 15 + i * 3,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              style={{
-                backgroundSize: '200% 200%',
-              }}
-            />
-          </motion.div>
+            className="absolute inset-0 rounded-full border border-zinc-700/30"
+            style={{ 
+              scale: 0.4 + i * 0.15,
+            }}
+          />
         ))}
       </div>
 
-      <div className="absolute w-16 h-16 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-50">
+      <div className="absolute w-20 h-20 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-50">
+        <div className="absolute w-full h-full rounded-full bg-cyan-500/20 blur-md"></div>
         {!imageError ? (
-          <Image 
-            src="/images/orbit-logo.png" 
-            alt="Patara" 
-            width={64} 
-            height={64}
-            onError={() => setImageError(true)}
-          />
+          <div className="relative">
+            <div className="absolute inset-0 bg-cyan-500/30 rounded-full blur-lg"></div>
+            <Image 
+              src="/images/orbit-logo.png" 
+              alt="Patara" 
+              width={64} 
+              height={64}
+              className="relative z-10"
+              onError={() => setImageError(true)}
+            />
+          </div>
         ) : (
           <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-2xl">
-            P
+            <div className="absolute inset-0 bg-cyan-500/30 rounded-full blur-lg"></div>
+            <span className="relative z-10">P</span>
           </div>
         )}
       </div>
@@ -64,9 +70,11 @@ export function OrbitAnimation() {
       {platformIcons.map((icon, index) => (
         <div
           key={icon.id}
-          className={`absolute w-10 h-10 rounded-full bg-gradient-to-br ${icon.gradient} flex items-center justify-center text-black font-medium shadow-lg z-40 transform -translate-x-1/2 -translate-y-1/2`}
+          className={`absolute w-10 h-10 rounded-full bg-gradient-to-br ${icon.gradient} flex items-center justify-center text-black font-medium shadow-lg z-40`}
           style={{
-            ...icon.position
+            left: `${icon.position.x}%`,
+            top: `${icon.position.y}%`,
+            transform: 'translate(-50%, -50%)'
           }}
         >
           <motion.span
