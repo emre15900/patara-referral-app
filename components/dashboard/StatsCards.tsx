@@ -27,8 +27,8 @@ export function StatsCards() {
             </svg>
           </div>
           <div className="flex-1">
-            <div className="text-sm text-zinc-400">Total Earned Fee</div>
-            <div className="text-2xl font-bold">$1,000.00</div>
+            <div className="text-xs text-zinc-400">Total Earned Fee</div>
+            <div className="text-md font-base">$1,000.00</div>
           </div>
         </div>
       </motion.div>
@@ -51,13 +51,13 @@ export function StatsCards() {
               </svg>
             </div>
             <div>
-              <div className="text-sm text-zinc-400">Unclaimed Fee</div>
-              <div className="text-2xl font-bold">$500.00</div>
+              <div className="text-xs text-zinc-400">Unclaimed Fee</div>
+              <div className="text-md font-base">$500.00</div>
             </div>
           </div>
           <Button 
             onClick={handleClaim}
-            className="bg-blue-600 hover:bg-blue-700 text-sm px-4"
+            className="bg-blue-600 hover:bg-blue-700 text-sm px-4 text-white rounded-xl"
           >
             Claim
           </Button>
@@ -85,8 +85,8 @@ export function StatsCards() {
             </svg>
           </div>
           <div>
-            <div className="text-sm text-zinc-400">Total Referral Points</div>
-            <div className="text-2xl font-bold">1289</div>
+            <div className="text-xs text-zinc-400">Total Referral Points</div>
+            <div className="text-md font-base">1289</div>
           </div>
         </div>
       </motion.div>
@@ -108,8 +108,8 @@ export function StatsCards() {
             </svg>
           </div>
           <div>
-            <div className="text-sm text-zinc-400">Referrals</div>
-            <div className="text-2xl font-bold">34</div>
+            <div className="text-xs text-zinc-400">Referrals</div>
+            <div className="text-md font-base">34</div>
           </div>
         </div>
       </motion.div>

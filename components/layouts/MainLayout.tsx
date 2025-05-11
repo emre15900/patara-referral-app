@@ -19,7 +19,7 @@ export function MainLayout({ children }: MainLayoutProps) {
       <div className="relative z-10 transition-none">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         
-        <main className="container max-w-screen-xl mx-auto px-4 sm:px-6 py-8">
+        <main className="container-fluid mx-auto sm:px-6 py-8">
           {children}
         </main>
       </div>

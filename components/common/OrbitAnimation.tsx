@@ -29,7 +29,7 @@ export function OrbitAnimation() {
             style={{ scale: 1 - i * 0.1 }}
           >
             <motion.div 
-              className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 opacity-30"
+              className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-cyan-500/20 to-pink-500/10 opacity-30"
               animate={{
                 backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
               }}
@@ -50,7 +50,7 @@ export function OrbitAnimation() {
       <div className="absolute w-16 h-16 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-50">
         {!imageError ? (
           <Image 
-            src="/logo/patara-logo.png" 
+            src="/images/orbit-logo.png" 
             alt="Patara" 
             width={64} 
             height={64}

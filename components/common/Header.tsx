@@ -41,7 +41,7 @@ export function Header({ sidebarOpen: propSidebarOpen, setSidebarOpen: propSetSi
       <div className={`fixed inset-0 bg-black/80 backdrop-blur-sm z-30 lg:hidden transition-opacity duration-300 ${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setSidebarOpen(false)} />
 
       <header className="border-b border-zinc-800 sticky top-0 z-100 bg-black/70 backdrop-blur-sm">
-        <div className="container max-w-screen-xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
+        <div className="container-fluid mx-auto sm:px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button 
               className="p-2 text-white bg-zinc-800 rounded-md hover:bg-zinc-700 flex items-center justify-center" 

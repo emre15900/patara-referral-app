@@ -13,7 +13,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { motion } from 'framer-motion';
 
-// Transaction tipi tanımlama
 interface TransactionType {
   id: number;
   account: string;
@@ -24,7 +23,7 @@ interface TransactionType {
   earned_fee: string;
   time: string;
   type: string;
-  [key: string]: string | number; // İndeks imzası
+  [key: string]: string | number; 
 }
 
 const generateTransactionData = (count: number): TransactionType[] => Array(count).fill(null).map((_, i) => ({
@@ -58,23 +57,18 @@ export function FilterableEarningsTable() {
     direction: 'asc'
   });
 
-  // Apply filters and search
   useEffect(() => {
     let result = [...transactionData];
 
-    // Apply type filter
     if (filters.type !== 'all') {
       result = result.filter(item => item.type === filters.type);
     }
 
-    // Apply time range filter
     if (filters.timeRange !== 'all') {
-      // This is a simplified example
       const timeString = filters.timeRange.toLowerCase();
       result = result.filter(item => item.time.toLowerCase().includes(timeString));
     }
 
-    // Apply search filter
     if (search) {
       const searchLower = search.toLowerCase();
       result = result.filter(item =>
@@ -86,7 +80,6 @@ export function FilterableEarningsTable() {
       );
     }
 
-    // Apply sorting
     if (sortConfig.key) {
       const key = sortConfig.key as string;
       result.sort((a, b) => {
@@ -103,19 +96,16 @@ export function FilterableEarningsTable() {
     setFilteredData(result);
   }, [filters, search, sortConfig]);
 
-  // Calculate pagination
   const indexOfLastEntry = currentPage * entriesPerPage;
   const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
   const currentEntries = filteredData.slice(indexOfFirstEntry, indexOfLastEntry);
   const totalPages = Math.ceil(filteredData.length / entriesPerPage);
   const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
 
-  // Reset to first page when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [filteredData.length]);
 
-  // Handle sorting
   const requestSort = (key: string) => {
     let direction: 'asc' | 'desc' = 'asc';
     if (sortConfig.key === key && sortConfig.direction === 'asc') {
@@ -124,7 +114,6 @@ export function FilterableEarningsTable() {
     setSortConfig({ key, direction });
   };
 
-  // Get sort icon
   const getSortIcon = (key: string) => {
     if (sortConfig.key !== key) {
       return (
@@ -152,7 +141,7 @@ export function FilterableEarningsTable() {
 
   return (
     <motion.div
-      className="bg-zinc-900 rounded-lg border border-zinc-800 overflow-hidden"
+      className="bg-zinc-900 rounded-xl overflow-hidden"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4 }}
@@ -379,7 +368,7 @@ export function FilterableEarningsTable() {
                         transaction.type === 'buy' ? 'bg-green-500/20 text-green-400' :
                           'bg-red-500/20 text-red-400'
                       }`}>
-                      {transaction.type}
+                      {transaction.type.toLocaleUpperCase()}
                     </span>
                   </TableCell>
                   <TableCell className="text-right">{transaction.time}</TableCell>
@@ -437,7 +426,6 @@ export function FilterableEarningsTable() {
           </Button>
 
           {totalPages <= 5 ? (
-            // Show all pages if 5 or fewer
             pageNumbers.map((page) => (
               <Button
                 key={page}
@@ -452,9 +440,7 @@ export function FilterableEarningsTable() {
               </Button>
             ))
           ) : (
-            // Show limited pages with ellipsis
             <>
-              {/* Always show first page */}
               <Button
                 variant={currentPage === 1 ? "default" : "outline"}
                 className={`h-8 w-8 ${currentPage === 1
@@ -466,7 +452,6 @@ export function FilterableEarningsTable() {
                 1
               </Button>
 
-              {/* Show ellipsis if not on first two pages */}
               {currentPage > 3 && (
                 <Button
                   variant="outline"
@@ -477,7 +462,6 @@ export function FilterableEarningsTable() {
                 </Button>
               )}
 
-              {/* Show current page and surrounding pages */}
               {pageNumbers
                 .filter(page => page !== 1 && page !== totalPages && Math.abs(page - currentPage) <= 1)
                 .map(page => (
@@ -495,7 +479,6 @@ export function FilterableEarningsTable() {
                 ))
               }
 
-              {/* Show ellipsis if not on last two pages */}
               {currentPage < totalPages - 2 && (
                 <Button
                   variant="outline"
@@ -506,7 +489,6 @@ export function FilterableEarningsTable() {
                 </Button>
               )}
 
-              {/* Always show last page */}
               <Button
                 variant={currentPage === totalPages ? "default" : "outline"}
                 className={`h-8 w-8 ${currentPage === totalPages

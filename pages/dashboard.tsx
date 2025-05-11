@@ -16,11 +16,11 @@ export default function Dashboard() {
   return (
     <MainLayout>
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <div className="lg:col-span-7">
+        <div className="lg:col-span-8">
           <ReferralCard />
         </div>
 
-        <div className="lg:col-span-5">
+        <div className="lg:col-span-4">
           <StatsCards />
         </div>
       </div>
@@ -30,7 +30,7 @@ export default function Dashboard() {
         <div className="flex flex-wrap gap-2">
           <Tabs defaultValue="all" className="w-full">
             <div className='flex items-center justify-between mb-4'>
-              <h2 className="text-xl font-semibold">Earnings</h2>
+              <h1 className="text-2xl font-base">Earnings</h1>
 
               <TabsList className="bg-zinc-900 p-1">
                 <TabsTrigger
