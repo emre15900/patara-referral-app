@@ -4,7 +4,17 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: [],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
+  pageExtensions: ['tsx', 'ts', 'jsx', 'js'],
+  experimental: {
+    esmExternals: true,
+  }
 };
 
 module.exports = nextConfig;

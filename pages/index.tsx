@@ -8,10 +8,8 @@ import { BackgroundAnimation } from '@/components/BackgroundAnimation';
 export default function Home() {
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Animasyonlu Arka Plan */}
       <BackgroundAnimation />
 
-      {/* Navigation */}
       <header className="border-b border-zinc-800 relative z-10">
         <div className="container max-w-screen-xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-4">
@@ -22,11 +20,14 @@ export default function Home() {
                 <line x1="4" x2="20" y1="18" y2="18" />
               </svg>
             </button>
-            <Link href="/" className="flex items-center gap-4 p-2 -ml-2">
-              <div className="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold">
-                P
+            <Link href="/">
+              <div className="max-w-[150px]">
+                <img
+                  src="/images/patara-logo.png"
+                  alt="Patara Logo"
+                  width="100%"
+                />
               </div>
-              <span className="font-bold text-xl ml-2">patara</span>
             </Link>
           </div>
 
@@ -47,17 +48,14 @@ export default function Home() {
             </button>
             <Button
               className="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-full py-6"
-              asChild
+              onClick={() => window.location.href = '/dashboard'}
             >
-              <Link href="/dashboard" passHref legacyBehavior>
-                <a>Connect/Sign in</a>
-              </Link>
+              Connect/Sign in
             </Button>
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
       <main className="flex min-h-[calc(100vh-64px)] flex-col items-center justify-center relative overflow-hidden">
         <div className="max-w-md w-full bg-zinc-900/60 backdrop-blur-sm p-12 rounded-lg border border-zinc-800 shadow-xl z-10">
           <div className="flex flex-col items-center text-center">
@@ -75,11 +73,9 @@ export default function Home() {
 
             <Button
               className="bg-blue-600 hover:bg-blue-700 text-white rounded-full w-full py-6"
-              asChild
+              onClick={() => window.location.href = '/dashboard'}
             >
-              <Link href="/dashboard" passHref legacyBehavior>
-                <a>Connect/Sign in</a>
-              </Link>
+              Connect/Sign in
             </Button>
           </div>
         </div>

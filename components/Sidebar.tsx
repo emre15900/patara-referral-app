@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const menuItems = [
   { 
@@ -84,28 +85,34 @@ export function Sidebar() {
         </SheetTrigger>
         <SheetContent side="left" className="bg-zinc-900 border-zinc-800 text-white p-0">
           <div className="p-4 border-b border-zinc-800">
-            <Link href="/" passHref legacyBehavior>
-              <a className="flex items-center gap-2">
-                <div className="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold">P</div>
-                <span className="font-bold text-xl">patara</span>
-              </a>
-            </Link>
+            <a href="/" className="flex items-center gap-2">
+              <div className="w-10 h-10">
+                <Image 
+                  src="/images/patara-logo.png"
+                  alt="Patara Logo"
+                  width={40}
+                  height={40}
+                  priority
+                />
+              </div>
+              <span className="font-bold text-xl">patara</span>
+            </a>
           </div>
           <nav className="p-4 flex-1">
             <ul className="space-y-2">
               {menuItems.map((item) => (
                 <li key={item.path}>
                   <Link 
-                    href={item.path} 
-                    onClick={() => setIsOpen(false)}
+                    href={item.path}
                     className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       pathname === item.path 
                         ? "bg-zinc-800 text-white" 
                         : "text-zinc-400 hover:text-white hover:bg-zinc-800/50"
                     }`}
+                    onClick={() => setIsOpen(false)}
                   >
                     {item.icon}
-                    {item.name}
+                    <span>{item.name}</span>
                   </Link>
                 </li>
               ))}
@@ -117,19 +124,25 @@ export function Sidebar() {
       {/* Desktop Sidebar */}
       <div className="hidden md:flex w-64 flex-col h-screen bg-zinc-900 border-r border-zinc-800 sticky top-0">
         <div className="p-4 border-b border-zinc-800">
-          <Link href="/" passHref legacyBehavior>
-            <a className="flex items-center gap-2">
-              <div className="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold">P</div>
-              <span className="font-bold text-xl">patara</span>
-            </a>
-          </Link>
+          <a href="/" className="flex items-center gap-2">
+            <div className="w-10 h-10">
+              <Image 
+                src="/images/patara-logo.png"
+                alt="Patara Logo"
+                width={40}
+                height={40}
+                priority
+              />
+            </div>
+            <span className="font-bold text-xl">patara</span>
+          </a>
         </div>
         <nav className="p-4 flex-1">
           <ul className="space-y-2">
             {menuItems.map((item) => (
               <li key={item.path}>
                 <Link 
-                  href={item.path} 
+                  href={item.path}
                   className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     pathname === item.path 
                       ? "bg-zinc-800 text-white" 
@@ -137,7 +150,7 @@ export function Sidebar() {
                   }`}
                 >
                   {item.icon}
-                  {item.name}
+                  <span>{item.name}</span>
                 </Link>
               </li>
             ))}
