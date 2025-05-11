@@ -28,136 +28,101 @@ const platformIcons = [
 
 export function OrbitAnimation() {
   const [imageError, setImageError] = useState(false);
-  
+
   return (
     <div className="relative w-64 h-64 flex items-center justify-center">
-      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900"></div>
-      
-      <motion.div 
-        className="absolute inset-0 rounded-full bg-gradient-to-br from-cyan-500/10 via-blue-500/5 to-transparent overflow-hidden"
-        animate={{
-          backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
-        }}
-        transition={{
-          duration: 15,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-        style={{
-          backgroundSize: '200% 200%',
-        }}
-      />
-      
+      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-zinc-900 via-zinc-800 to-zinc-900" />
+
+      <motion.div
+        className="absolute inset-0 rounded-full overflow-hidden"
+        style={{ backgroundSize: '200% 200%' }}
+        animate={{ backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'] }}
+        transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-transparent" />
+      </motion.div>
+
       <div className="absolute inset-0">
-        {[...Array(5)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute inset-0 rounded-full border border-cyan-700/30"
-            style={{ 
-              scale: 0.4 + i * 0.15,
-            }}
-            animate={{
-              scale: [0.4 + i * 0.15, (0.4 + i * 0.15) + 0.03, 0.4 + i * 0.15],
-              opacity: [0.5, 0.8, 0.5],
-            }}
-            transition={{
-              duration: 6 + i,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: i * 0.5,
-            }}
-          />
-        ))}
+        {[...Array(5)].map((_, i) => {
+          const baseScale = 0.4 + i * 0.15;
+          return (
+            <motion.div
+              key={i}
+              className="absolute inset-0 rounded-full border border-cyan-700/20"
+              style={{ scale: baseScale }}
+              animate={{
+                scale: [baseScale, baseScale + 0.03, baseScale],
+                opacity: [0.5, 0.8, 0.5],
+              }}
+              transition={{
+                duration: 6 + i,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: i * 0.5,
+              }}
+            />
+          );
+        })}
       </div>
-      
+
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(3)].map((_, i) => (
+        {[...Array(5)].map((_, i) => (
           <motion.div
             key={`wave-${i}`}
             className="absolute inset-0 rounded-full border-2 border-cyan-500/20 overflow-hidden"
             animate={{
-              scale: [0.7, 0.9, 0.7],
+              scale: [0.4, 0.9, 0.4],
               rotate: [0, i % 2 === 0 ? 20 : -20, 0],
             }}
             transition={{
               duration: 12 + i * 4,
               repeat: Infinity,
-              ease: "easeInOut",
+              ease: 'easeInOut',
               delay: i * 1.2,
             }}
           >
-            <motion.div 
-              className="absolute inset-0 bg-gradient-to-r from-cyan-100/10 via-blue-500/10 to-transparent"
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-              }}
-              transition={{
-                duration: 15 + i * 3,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-              style={{
-                backgroundSize: '200% 200%',
-              }}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-cyan-900/10 via-blue-900/5 to-transparent"
+              style={{ backgroundSize: '200% 200%' }}
+              animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+              transition={{ duration: 15 + i * 3, repeat: Infinity, ease: 'linear' }}
             />
           </motion.div>
         ))}
       </div>
 
-      <div className="absolute w-20 h-20 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-50">
-        <div className="absolute w-full h-full rounded-full bg-cyan-500/20 blur-md"></div>
-        <motion.div 
-          className="absolute w-full h-full rounded-full bg-cyan-400/20 blur-lg"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.6, 0.8, 0.6],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-50">
         {!imageError ? (
-          <div className="relative">
-            <div className="absolute inset-0 bg-cyan-500/30 rounded-full blur-lg"></div>
-            <Image 
-              src="/images/orbit-logo.png" 
-              alt="Patara" 
-              width={64} 
-              height={64}
-              className="relative z-10"
-              onError={() => setImageError(true)}
-            />
-          </div>
+          <Image
+            src="/images/orbit-logo.png"
+            alt="Patara"
+            width={64}
+            height={64}
+            onError={() => setImageError(true)}
+          />
         ) : (
-          <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-2xl">
-            <div className="absolute inset-0 bg-cyan-500/30 rounded-full blur-lg"></div>
-            <span className="relative z-10">P</span>
+          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-bold text-2xl">
+            P
           </div>
         )}
       </div>
 
-      {platformIcons.map((icon, index) => (
+      {platformIcons.map((icon, idx) => (
         <div
           key={icon.id}
-          className={`absolute w-10 h-10 rounded-full bg-gradient-to-br ${icon.gradient} flex items-center justify-center text-black font-medium shadow-lg z-40`}
+          className={`
+            absolute w-10 h-10 rounded-full bg-gradient-to-br ${icon.gradient}
+            flex items-center justify-center text-black font-medium shadow-lg z-40
+          `}
           style={{
             left: `${icon.position.x}%`,
             top: `${icon.position.y}%`,
-            transform: 'translate(-50%, -50%)'
+            transform: 'translate(-50%, -50%)',
           }}
         >
           <motion.span
-            animate={{
-              opacity: [0.8, 1, 0.8],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: index * 0.2,
-            }}
+            animate={{ opacity: [0.8, 1, 0.8] }}
+            transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut', delay: idx * 0.2 }}
           >
             {icon.id}
           </motion.span>

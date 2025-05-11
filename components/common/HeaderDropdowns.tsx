@@ -59,7 +59,7 @@ export function NotificationsDropdown() {
         </div>
 
         <div className="mt-4 pt-4 border-t border-zinc-800">
-          <Button variant="ghost" size="sm" className="w-full justify-center text-zinc-400 hover:text-white">
+          <Button variant="ghost" size="sm" className="w-full justify-center text-zinc-400">
             View all notifications
           </Button>
         </div>
