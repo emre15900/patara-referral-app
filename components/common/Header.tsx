@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 import { Dispatch, SetStateAction, useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { usePathname } from 'next/navigation';
+import { Search } from "lucide-react";
 
 const NotificationsDropdown = dynamic(
   () => import('@/components/common/HeaderDropdowns').then(mod => mod.NotificationsDropdown),
@@ -35,6 +36,7 @@ export function Header({
   isAuthenticated = false
 }: HeaderProps) {
   const [localSidebarOpen, setLocalSidebarOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const sidebarOpen = propSidebarOpen !== undefined ? propSidebarOpen : localSidebarOpen;
   const setSidebarOpen = propSetSidebarOpen || setLocalSidebarOpen;
@@ -102,11 +104,18 @@ export function Header({
             </Link>
           </div>
 
-          <SearchBar />
+          <SearchBar isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
 
           <div className="flex items-center gap-4">
             {isAuthenticated ? (
               <>
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="[@media(min-width:870px)]:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-zinc-800 hover:bg-zinc-700 transition-colors"
+                  aria-label="Search"
+                >
+                  <Search className="text-white" size={20} />
+                </button>
                 <NotificationsDropdown />
                 <SettingsDropdown />
                 <UserDropdown />
