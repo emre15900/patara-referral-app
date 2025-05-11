@@ -74,10 +74,10 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   const pathname = usePathname();
 
   useEffect(() => {
-    if (isOpen && window.innerWidth < 768) {
+    if (window.innerWidth < 768) {
       setIsOpen(false);
     }
-  }, [pathname, setIsOpen, isOpen]);
+  }, [pathname, setIsOpen]);
 
   const renderNavItems = () => (
     <ul className="space-y-2">
@@ -103,7 +103,10 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
     <>
       <div className="md:hidden">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
-          <SheetContent side="left" className="bg-zinc-900 border-zinc-800 text-white p-0 w-[250px] max-w-[200px]">
+          <SheetContent 
+            side="left" 
+            className="bg-zinc-900 border-zinc-800 text-white p-0 w-[250px] max-w-[250px] transition-all duration-500 ease-in-out"
+          >
             <div className="p-3 border-b border-zinc-800">
               <Link href="/" className="block max-w-[130px]">
                 <Image
