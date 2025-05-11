@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { OrbitAnimation } from '@/components/common/OrbitAnimation';
 import { toast } from 'sonner';
@@ -8,12 +8,39 @@ import { toast } from 'sonner';
 export function ReferralCard() {
   const [isCopied, setIsCopied] = useState(false);
   const referralLink = "0x0e0Fdd520F76f3eAC0dAa76Ac0e489FC53b366f58";
+  const textRef = useRef(null);
   
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(referralLink);
-    setIsCopied(true);
-    toast.success("Referral link copied to clipboard!");
-    setTimeout(() => setIsCopied(false), 2000);
+  const copyToClipboard = async () => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(referralLink);
+      } else {
+        const textArea = document.createElement("textarea");
+        textArea.value = referralLink;
+        textArea.style.position = "fixed"; 
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        try {
+          document.execCommand('copy');
+        } catch (err) {
+          console.error("Fallback: Copy failed", err);
+          toast.error("Copy failed");
+          document.body.removeChild(textArea);
+          return;
+        }
+        
+        document.body.removeChild(textArea);
+      }
+      
+      setIsCopied(true);
+      toast.success("Referral link copied to clipboard!");
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy: ", err);
+      toast.error("Failed to copy to clipboard");
+    }
   };
   
   const handleShare = async () => {
@@ -51,7 +78,10 @@ export function ReferralCard() {
             <div className="mb-2">
               <label className="text-zinc-400 text-xs">Your Referral Link:</label>
             </div>
-            <div className="bg-zinc-800 p-3 rounded flex items-center break-all text-sm mb-4 border border-zinc-700">
+            <div 
+              ref={textRef}
+              className="bg-zinc-800 p-3 rounded flex items-center break-all text-sm mb-4 border border-zinc-700"
+            >
               {referralLink}
             </div>
             

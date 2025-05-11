@@ -26,11 +26,12 @@ export default function Dashboard() {
       </div>
 
       <div className="mt-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between mb-4 gap-4">
-          <h2 className="text-xl font-semibold">Earnings</h2>
 
-          <div className="flex flex-wrap gap-2">
-            <Tabs defaultValue="all" className="w-full">
+        <div className="flex flex-wrap gap-2">
+          <Tabs defaultValue="all" className="w-full">
+            <div className='flex items-center justify-between mb-4'>
+              <h2 className="text-xl font-semibold">Earnings</h2>
+
               <TabsList className="bg-zinc-900 p-1">
                 <TabsTrigger
                   value="1d"
@@ -68,23 +69,23 @@ export default function Dashboard() {
                   ALL
                 </TabsTrigger>
               </TabsList>
-              <TabsContent value="all">
-                <FilterableEarningsTable />
-              </TabsContent>
-              <TabsContent value="1d">
-                <FilterableEarningsTable />
-              </TabsContent>
-              <TabsContent value="1w">
-                <FilterableEarningsTable />
-              </TabsContent>
-              <TabsContent value="1m">
-                <FilterableEarningsTable />
-              </TabsContent>
-              <TabsContent value="1y">
-                <FilterableEarningsTable />
-              </TabsContent>
-            </Tabs>
-          </div>
+            </div>
+            <TabsContent value="all">
+              <FilterableEarningsTable />
+            </TabsContent>
+            <TabsContent value="1d">
+              <FilterableEarningsTable />
+            </TabsContent>
+            <TabsContent value="1w">
+              <FilterableEarningsTable />
+            </TabsContent>
+            <TabsContent value="1m">
+              <FilterableEarningsTable />
+            </TabsContent>
+            <TabsContent value="1y">
+              <FilterableEarningsTable />
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </MainLayout>
