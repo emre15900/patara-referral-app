@@ -9,10 +9,18 @@ import {
   Gift,
   Users
 } from 'lucide-react';
+import { useState } from 'react';
 
 export function StatsCards() {
-  const handleClaim = () => {
+  const [isClaiming, setIsClaiming] = useState(false);
+  const [hasClaimed, setHasClaimed] = useState(false);
+
+  const handleClaim = async () => {
+    setIsClaiming(true);
+    await new Promise(resolve => setTimeout(resolve, 1500));
     toast.success("Claim request submitted. You'll receive your funds shortly!");
+    setIsClaiming(false);
+    setHasClaimed(true);
   };
 
   const statsData = [
@@ -74,12 +82,13 @@ export function StatsCards() {
                 <div className="text-md font-base">{stat.value}</div>
               </div>
             </div>
-            {stat.action && (
+            {stat.action && !hasClaimed && (
               <Button
                 onClick={stat.action.onClick}
-                className="bg-blue-600 hover:bg-blue-700 text-sm px-4 text-white rounded-xl"
+                disabled={isClaiming}
+                className="bg-blue-600 hover:bg-blue-700 text-sm px-4 text-white rounded-xl disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {stat.action.label}
+                {isClaiming ? "Claiming..." : stat.action.label}
               </Button>
             )}
           </div>
