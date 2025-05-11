@@ -12,6 +12,8 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
         <title>Patara Referral App</title>
+        <link rel="icon" href="/logo/patara-favicon.png" type="image/png" />
+        <link rel="shortcut icon" href="/logo/patara-favicon.png" type="image/png" />
       </Head>
       <Component {...pageProps} />
       <Toaster 
