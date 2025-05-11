@@ -1,6 +1,6 @@
 "use client";
 
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
@@ -73,6 +73,12 @@ interface SidebarProps {
 export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   const pathname = usePathname();
 
+  useEffect(() => {
+    if (isOpen && window.innerWidth < 768) {
+      setIsOpen(false);
+    }
+  }, [pathname, setIsOpen, isOpen]);
+
   const renderNavItems = () => (
     <ul className="space-y-2">
       {menuItems.map((item) => (
@@ -80,8 +86,8 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
           <Link
             href={item.path}
             className={`flex items-center gap-3 px-2 py-2 rounded-md text-sm font-medium transition-colors ${pathname === item.path
-                ? "bg-zinc-800 text-white"
-                : "text-zinc-400 hover:text-white hover:bg-zinc-800/50"
+              ? "bg-zinc-800 text-white"
+              : "text-zinc-400 hover:text-white hover:bg-zinc-800/50"
               }`}
             onClick={() => setIsOpen(false)}
           >

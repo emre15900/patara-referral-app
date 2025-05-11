@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { toast } from "sonner";
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -160,6 +160,15 @@ export function SettingsDropdown() {
 export function UserDropdown() {
   const [copyStatus, setCopyStatus] = useState('Copy');
   const referralLink = "https://patara.io/ref/0x1a2b3c4d5e6f7g8h9i0j";
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   const copyToClipboard = async () => {
     try {
@@ -171,8 +180,13 @@ export function UserDropdown() {
         duration: 3000,
       });
       
-      setTimeout(() => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      
+      timeoutRef.current = setTimeout(() => {
         setCopyStatus('Copy');
+        timeoutRef.current = null;
       }, 2000);
     } catch (err) {
       console.error('Failed to copy: ', err);
