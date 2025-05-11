@@ -16,15 +16,16 @@ const generateCircularPositions = (count: number) => {
 const positions = generateCircularPositions(8);
 
 const platformIcons = [
-  { id: 'P', gradient: 'from-red-300 to-pink-300', position: positions[0] },
-  { id: 'M', gradient: 'from-yellow-200 to-amber-200', position: positions[1] },
-  { id: 'F', gradient: 'from-green-300 to-emerald-300', position: positions[2] },
-  { id: 'S', gradient: 'from-purple-300 to-violet-300', position: positions[3] },
-  { id: 'G', gradient: 'from-orange-300 to-amber-300', position: positions[4] },
-  { id: 'C', gradient: 'from-rose-300 to-pink-300', position: positions[5] },
-  { id: 'W', gradient: 'from-blue-300 to-indigo-300', position: positions[6] },
-  { id: 'A', gradient: 'from-orange-200 to-amber-200', position: positions[7] },
+  { id: 'P', gradient: 'from-[#FF8A80] via-[#FF4081] to-[#F50057]', position: positions[0] },
+  { id: 'M', gradient: 'from-[#FFEA00] via-[#FFD600] to-[#FFC400]', position: positions[1] },
+  { id: 'F', gradient: 'from-[#B9F6CA] via-[#69F0AE] to-[#00E676]', position: positions[2] },
+  { id: 'S', gradient: 'from-[#EA80FC] via-[#E040FB] to-[#9C27B0]', position: positions[3] },
+  { id: 'G', gradient: 'from-[#FFD740] via-[#FFC400] to-[#FFAB00]', position: positions[4] },
+  { id: 'C', gradient: 'from-[#FF80AB] via-[#FF4081] to-[#F50057]', position: positions[5] },
+  { id: 'W', gradient: 'from-[#84FFFF] via-[#18FFFF] to-[#00B0FF]', position: positions[6] },
+  { id: 'A', gradient: 'from-[#FFD180] via-[#FFB300] to-[#FFAB00]', position: positions[7] },
 ];
+
 
 export function OrbitAnimation() {
   const [imageError, setImageError] = useState(false);
@@ -82,7 +83,7 @@ export function OrbitAnimation() {
             }}
           >
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-cyan-900/10 via-blue-900/5 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-cyan-900/5 via-blue-900/5 to-transparent"
               style={{ backgroundSize: '200% 200%' }}
               animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
               transition={{ duration: 15 + i * 3, repeat: Infinity, ease: 'linear' }}
@@ -111,9 +112,9 @@ export function OrbitAnimation() {
         <div
           key={icon.id}
           className={`
-            absolute w-10 h-10 rounded-full bg-gradient-to-br ${icon.gradient}
-            flex items-center justify-center text-black font-medium shadow-lg z-40
-          `}
+      absolute w-10 h-10 rounded-full bg-gradient-to-br ${icon.gradient}
+      flex items-center justify-center text-black font-medium shadow-lg z-40
+    `}
           style={{
             left: `${icon.position.x}%`,
             top: `${icon.position.y}%`,
@@ -128,6 +129,8 @@ export function OrbitAnimation() {
           </motion.span>
         </div>
       ))}
+
+
     </div>
   );
 }
