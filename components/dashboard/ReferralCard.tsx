@@ -72,7 +72,7 @@ export function ReferralCard() {
   };
 
   return (
-    <div className="bg-zinc-900 rounded-2xl p-6">
+    <div className="bg-zinc-900 rounded-2xl p-8">
       <div className="flex flex-col">
         <div className="flex flex-col md:flex-row gap-10 items-center">
           <div className='w-full'>
@@ -116,7 +116,7 @@ export function ReferralCard() {
             </div>
           </div>
 
-          <div className="w-full sm:w-auto flex-shrink-0 px-8">
+          <div className="w-full w-auto flex-shrink-0 px-8">
             <OrbitAnimation />
           </div>
         </div>

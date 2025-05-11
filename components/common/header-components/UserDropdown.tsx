@@ -7,11 +7,15 @@ import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { UserAvatar } from '@/components/common/UserAvatar';
 import { ChevronDown } from 'lucide-react';
+import { usePathname } from 'next/navigation';
 
 export function UserDropdown() {
   const [copyStatus, setCopyStatus] = useState('Copy');
   const referralLink = "https://patara.io/ref/0x1a2b3c4d5e6f7g8h9i0j";
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const [isResponsive, setIsResponsive] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     return () => {
@@ -50,6 +54,22 @@ export function UserDropdown() {
     }
   };
 
+
+  const handleResize = () => {
+    setIsResponsive(window.innerWidth < 445);
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    handleResize();
+  }, [pathname]);
+
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -59,11 +79,13 @@ export function UserDropdown() {
           className="flex items-center gap-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg px-1.5 py-1"
         >
           <UserAvatar size="sm" />
-          <span className="text-sm font-medium">@patara.sui</span>
+          {
+            !isResponsive && <span className="text-sm font-medium">@patara.sui</span>
+          }
           <ChevronDown size={16} />
         </Button>
       </DropdownMenuTrigger>
-      
+
       <DropdownMenuContent align="end" className="bg-zinc-900 border-zinc-800 text-white p-4 w-80">
         <div className="flex items-center gap-3 mb-2">
           <UserAvatar size="md" />

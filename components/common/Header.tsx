@@ -42,6 +42,7 @@ export function Header({
   const setSidebarOpen = propSetSidebarOpen || setLocalSidebarOpen;
 
   const [isResponsive, setIsResponsive] = useState(false);
+  
   const pathname = usePathname();
 
   const handleResize = () => {
@@ -67,7 +68,7 @@ export function Header({
       <div className={`fixed inset-0 bg-black/80 backdrop-blur-sm z-30 lg:hidden transition-opacity duration-300 ${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setSidebarOpen(false)} />
 
       <header className="border-b border-zinc-800 sticky top-0 z-[9999] bg-black/70 backdrop-blur-sm">
-        <div className="container-fluid mx-auto sm:px-6 py-3 flex items-center justify-between">
+        <div className="container-fluid p-2 mx-auto sm:px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-4">
             {
               isAuthenticated && <button
@@ -96,7 +97,7 @@ export function Header({
                 <Image
                   src="/logo/patara-logo.png"
                   alt="Patara Logo"
-                  width={150}
+                  width={130}
                   height={40}
                   style={{ width: '100%', height: 'auto' }}
                 />
@@ -121,11 +122,20 @@ export function Header({
                 <UserDropdown />
               </>
             ) : (
-              <Link href="/dashboard">
-                <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl px-6 py-2">
-                  Connect/Sign in
-                </Button>
-              </Link>
+              <div className='flex items-center gap-2'>
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="[@media(min-width:870px)]:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-zinc-800 hover:bg-zinc-700 transition-colors"
+                  aria-label="Search"
+                >
+                  <Search className="text-white" size={20} />
+                </button>
+                <Link href="/dashboard">
+                  <Button className="bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-6 py-2">
+                    Connect/Sign in
+                  </Button>
+                </Link>
+              </div>
             )}
           </div>
         </div>
