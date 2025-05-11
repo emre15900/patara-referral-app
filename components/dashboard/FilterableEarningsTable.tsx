@@ -150,12 +150,12 @@ export function FilterableEarningsTable() {
       transition={{ duration: 0.4 }}
     >
       {/* Filters */}
-      <div className="p-4 border-b border-zinc-800 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-        <div className="flex items-center gap-2 flex-wrap">
+      <div className="p-4 border-b border-zinc-800 flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between">
+        <div className="flex items-center gap-2 flex-wrap w-full lg:w-auto">
           {/* Type Filter */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="bg-zinc-800 border-zinc-700 text-zinc-300 hover:bg-zinc-700">
+              <Button variant="outline" className="bg-zinc-800 border-zinc-700 text-zinc-300 hover:bg-zinc-700 text-sm whitespace-nowrap">
                 Type: {filters.type.charAt(0).toUpperCase() + filters.type.slice(1)}
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2">
                   <path d="m6 9 6 6 6-6" />
@@ -194,7 +194,7 @@ export function FilterableEarningsTable() {
           {/* Time Range Filter */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="outline" className="bg-zinc-800 border-zinc-700 text-zinc-300 hover:bg-zinc-700">
+              <Button variant="outline" className="bg-zinc-800 border-zinc-700 text-zinc-300 hover:bg-zinc-700 text-sm whitespace-nowrap">
                 Time: {filters.timeRange.charAt(0).toUpperCase() + filters.timeRange.slice(1)}
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="ml-2">
                   <path d="m6 9 6 6 6-6" />
@@ -234,7 +234,7 @@ export function FilterableEarningsTable() {
           <Button
             variant="ghost"
             size="sm"
-            className="text-blue-400 hover:text-blue-300"
+            className="text-blue-400 hover:text-blue-300 text-sm"
             onClick={() => {
               setFilters({ type: 'all', timeRange: 'all' });
               setSearch('');
@@ -246,7 +246,7 @@ export function FilterableEarningsTable() {
         </div>
 
         {/* Search box */}
-        <div className="relative w-full sm:w-auto">
+        <div className="relative w-full lg:w-auto">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -267,7 +267,7 @@ export function FilterableEarningsTable() {
             placeholder="Search transactions..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10 bg-zinc-800 border-zinc-700 text-white w-full sm:w-60"
+            className="pl-10 bg-zinc-800 border-zinc-700 text-white w-full lg:w-60"
           />
         </div>
       </div>
@@ -278,7 +278,7 @@ export function FilterableEarningsTable() {
           <TableHeader>
             <TableRow className="bg-zinc-800 border-b border-zinc-700 hover:bg-zinc-800">
               <TableHead
-                className="text-zinc-400 font-medium cursor-pointer"
+                className="text-zinc-400 font-medium cursor-pointer whitespace-nowrap"
                 onClick={() => requestSort('account')}
               >
                 <div className="flex items-center">
@@ -287,7 +287,7 @@ export function FilterableEarningsTable() {
                 </div>
               </TableHead>
               <TableHead
-                className="text-zinc-400 font-medium cursor-pointer"
+                className="text-zinc-400 font-medium cursor-pointer whitespace-nowrap hidden md:table-cell"
                 onClick={() => requestSort('amount_in')}
               >
                 <div className="flex items-center">
@@ -296,7 +296,7 @@ export function FilterableEarningsTable() {
                 </div>
               </TableHead>
               <TableHead
-                className="text-zinc-400 font-medium cursor-pointer"
+                className="text-zinc-400 font-medium cursor-pointer whitespace-nowrap hidden md:table-cell"
                 onClick={() => requestSort('amount_out')}
               >
                 <div className="flex items-center">
@@ -305,7 +305,7 @@ export function FilterableEarningsTable() {
                 </div>
               </TableHead>
               <TableHead
-                className="text-zinc-400 font-medium cursor-pointer"
+                className="text-zinc-400 font-medium cursor-pointer whitespace-nowrap"
                 onClick={() => requestSort('price')}
               >
                 <div className="flex items-center">
@@ -314,7 +314,7 @@ export function FilterableEarningsTable() {
                 </div>
               </TableHead>
               <TableHead
-                className="text-zinc-400 font-medium cursor-pointer"
+                className="text-zinc-400 font-medium cursor-pointer whitespace-nowrap hidden sm:table-cell"
                 onClick={() => requestSort('value')}
               >
                 <div className="flex items-center">
@@ -323,16 +323,16 @@ export function FilterableEarningsTable() {
                 </div>
               </TableHead>
               <TableHead
-                className="text-zinc-400 font-medium cursor-pointer"
+                className="text-zinc-400 font-medium cursor-pointer whitespace-nowrap"
                 onClick={() => requestSort('earned_fee')}
               >
                 <div className="flex items-center">
-                  EARNED FEE
+                  FEE
                   {getSortIcon('earned_fee')}
                 </div>
               </TableHead>
               <TableHead
-                className="text-zinc-400 font-medium cursor-pointer"
+                className="text-zinc-400 font-medium cursor-pointer whitespace-nowrap"
                 onClick={() => requestSort('type')}
               >
                 <div className="flex items-center">
@@ -341,7 +341,7 @@ export function FilterableEarningsTable() {
                 </div>
               </TableHead>
               <TableHead
-                className="text-right text-zinc-400 font-medium cursor-pointer"
+                className="text-right text-zinc-400 font-medium cursor-pointer whitespace-nowrap hidden sm:table-cell"
                 onClick={() => requestSort('time')}
               >
                 <div className="flex items-center justify-end">
@@ -355,27 +355,28 @@ export function FilterableEarningsTable() {
             {currentEntries.length > 0 ? (
               currentEntries.map((transaction) => (
                 <TableRow key={transaction.id} className="border-b border-zinc-800 hover:bg-zinc-800/50">
-                  <TableCell className="flex items-center gap-2">
+                  <TableCell className="flex items-center gap-2 max-w-[150px] md:max-w-none">
                     {!imageError ? (
                       <Image
                         src="/images/orbit-logo.png"
                         alt="Patara"
-                        width={40}
-                        height={40}
+                        width={24}
+                        height={24}
+                        className="min-w-[24px]"
                         onError={() => setImageError(true)}
                       />
                     ) : (
-                      <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-2xl">
+                      <div className="w-6 h-6 min-w-[24px] bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xs">
                         P
                       </div>
                     )}
-                    <span>{transaction.account}</span>
+                    <span className="truncate text-sm">{transaction.account}</span>
                   </TableCell>
-                  <TableCell>{transaction.amount_in}</TableCell>
-                  <TableCell>{transaction.amount_out}</TableCell>
-                  <TableCell>{transaction.price}</TableCell>
-                  <TableCell>{transaction.value}</TableCell>
-                  <TableCell>{transaction.earned_fee}</TableCell>
+                  <TableCell className="whitespace-nowrap hidden md:table-cell text-sm">{transaction.amount_in}</TableCell>
+                  <TableCell className="whitespace-nowrap hidden md:table-cell text-sm">{transaction.amount_out}</TableCell>
+                  <TableCell className="whitespace-nowrap text-sm">{transaction.price}</TableCell>
+                  <TableCell className="whitespace-nowrap hidden sm:table-cell text-sm">{transaction.value}</TableCell>
+                  <TableCell className="whitespace-nowrap text-sm">{transaction.earned_fee}</TableCell>
                   <TableCell>
                     <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${transaction.type === 'swap' ? 'bg-blue-500/20 text-blue-400' :
                       transaction.type === 'buy' ? 'bg-green-500/20 text-green-400' :
@@ -384,7 +385,7 @@ export function FilterableEarningsTable() {
                       {transaction.type.toLocaleUpperCase()}
                     </span>
                   </TableCell>
-                  <TableCell className="text-right">{transaction.time}</TableCell>
+                  <TableCell className="text-right whitespace-nowrap hidden sm:table-cell text-sm">{transaction.time}</TableCell>
                 </TableRow>
               ))
             ) : (
@@ -399,12 +400,12 @@ export function FilterableEarningsTable() {
       </div>
 
       {/* Pagination */}
-      <div className="p-4 flex items-center justify-between bg-zinc-800/50 border-t border-zinc-700">
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-zinc-400">{filteredData.length} Transactions</span>
+      <div className="p-4 flex flex-col sm:flex-row items-center justify-between bg-zinc-800/50 border-t border-zinc-700 gap-4">
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-start">
+          <span className="text-xs sm:text-sm text-zinc-400">{filteredData.length} Transactions</span>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="h-8 px-2 text-zinc-400">
+              <Button variant="ghost" size="sm" className="h-8 px-2 text-zinc-400 text-xs sm:text-sm">
                 <span className="mr-1">{entriesPerPage}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="m6 9 6 6 6-6" />
@@ -416,7 +417,7 @@ export function FilterableEarningsTable() {
                 <DropdownMenuItem
                   key={number}
                   onClick={() => setEntriesPerPage(number)}
-                  className="cursor-pointer"
+                  className="cursor-pointer text-xs sm:text-sm"
                 >
                   {number} entries
                 </DropdownMenuItem>
@@ -425,7 +426,7 @@ export function FilterableEarningsTable() {
           </DropdownMenu>
         </div>
 
-        <div className="flex items-center justify-center gap-1 flex-1">
+        <div className="flex items-center justify-center gap-1 order-first sm:order-none w-full sm:w-auto">
           {totalPages <= 5 ? (
             pageNumbers.map((page) => (
               <Button
@@ -504,7 +505,7 @@ export function FilterableEarningsTable() {
           )}
         </div>
 
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 w-full sm:w-auto justify-center sm:justify-end">
           <Button
             variant="outline"
             size="icon"
