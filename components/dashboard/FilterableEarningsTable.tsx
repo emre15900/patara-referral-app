@@ -11,8 +11,17 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator
 } from '@/components/ui/dropdown-menu';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogClose
+} from "@/components/ui/dialog";
+import { X } from "lucide-react";
 
 interface TransactionType {
   id: number;
@@ -59,6 +68,16 @@ export function FilterableEarningsTable() {
     key: null,
     direction: 'asc'
   });
+  
+  // New state for the modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedTransaction, setSelectedTransaction] = useState<TransactionType | null>(null);
+
+  // Handle row click to open the modal
+  const handleRowClick = (transaction: TransactionType) => {
+    setSelectedTransaction(transaction);
+    setIsModalOpen(true);
+  };
 
   useEffect(() => {
     let result = [...transactionData];
@@ -354,7 +373,11 @@ export function FilterableEarningsTable() {
           <TableBody>
             {currentEntries.length > 0 ? (
               currentEntries.map((transaction) => (
-                <TableRow key={transaction.id} className="border-b border-zinc-800 hover:bg-zinc-800/50">
+                <TableRow 
+                  key={transaction.id} 
+                  className="border-b border-zinc-800 hover:bg-zinc-800/50 cursor-pointer"
+                  onClick={() => handleRowClick(transaction)}
+                >
                   <TableCell className="flex items-center gap-2 max-w-[150px] md:max-w-none">
                     {!imageError ? (
                       <Image
@@ -531,6 +554,104 @@ export function FilterableEarningsTable() {
           </Button>
         </div>
       </div>
+
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="bg-zinc-900 border-zinc-800 text-white max-w-2xl">
+          <DialogHeader>
+            <div className="flex items-center justify-between">
+              <DialogTitle className="text-xl font-semibold text-white">
+                Transaction Details
+              </DialogTitle>
+            </div>
+            <DialogDescription className="text-zinc-400">
+              Complete details of the selected transaction
+            </DialogDescription>
+          </DialogHeader>
+          
+          {selectedTransaction && (
+            <div className="py-4 space-y-6">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                  <p className="text-zinc-500 text-sm mb-1">Transaction ID</p>
+                  <p className="font-medium">#{selectedTransaction.id}</p>
+                </div>
+                <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-sm font-medium ${selectedTransaction.type === 'swap' ? 'bg-blue-500/20 text-blue-400' :
+                  selectedTransaction.type === 'buy' ? 'bg-green-500/20 text-green-400' :
+                    'bg-red-500/20 text-red-400'
+                  }`}>
+                  {selectedTransaction.type.toLocaleUpperCase()}
+                </span>
+              </div>
+              
+              <div>
+                <p className="text-zinc-500 text-sm mb-1">Account</p>
+                <div className="flex items-center gap-2">
+                  {!imageError ? (
+                    <Image
+                      src="/images/orbit-logo.png"
+                      alt="Patara"
+                      width={24}
+                      height={24}
+                      className="min-w-[24px]"
+                      onError={() => setImageError(true)}
+                    />
+                  ) : (
+                    <div className="w-6 h-6 min-w-[24px] bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-xs">
+                      P
+                    </div>
+                  )}
+                  <span className="font-mono text-sm break-all">
+                    {selectedTransaction.account}
+                  </span>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <p className="text-zinc-500 text-sm mb-1">Amount In</p>
+                  <p className="font-medium">{selectedTransaction.amount_in}</p>
+                </div>
+                <div>
+                  <p className="text-zinc-500 text-sm mb-1">Amount Out</p>
+                  <p className="font-medium">{selectedTransaction.amount_out}</p>
+                </div>
+                <div>
+                  <p className="text-zinc-500 text-sm mb-1">Price</p>
+                  <p className="font-medium">{selectedTransaction.price}</p>
+                </div>
+                <div>
+                  <p className="text-zinc-500 text-sm mb-1">Value</p>
+                  <p className="font-medium">{selectedTransaction.value}</p>
+                </div>
+                <div>
+                  <p className="text-zinc-500 text-sm mb-1">Earned Fee</p>
+                  <p className="font-medium">{selectedTransaction.earned_fee}</p>
+                </div>
+                <div>
+                  <p className="text-zinc-500 text-sm mb-1">Time</p>
+                  <p className="font-medium">{selectedTransaction.time}</p>
+                </div>
+              </div>
+              
+              <div className="pt-4 border-t border-zinc-800 flex justify-end gap-2">
+                <Button
+                  variant="outline"
+                  className="bg-zinc-800 border-zinc-700 text-zinc-300 hover:bg-zinc-700"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  Close
+                </Button>
+                <Button
+                  variant="default"
+                  className="bg-blue-600 hover:bg-blue-700 text-white"
+                >
+                  View Explorer
+                </Button>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </motion.div>
   );
 } 
