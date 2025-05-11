@@ -65,7 +65,7 @@ export function Header({
             }
 
             <Link href="/" className="block max-w-[150px]">
-              <img
+              <Image
                 src="/logo/patara-logo.png"
                 alt="Patara Logo"
                 width={150}

@@ -1,5 +1,7 @@
 "use client";
 
+import Image from 'next/image';
+
 interface UserAvatarProps {
   size?: 'sm' | 'md' | 'lg';
 }
@@ -15,9 +17,11 @@ export function UserAvatar({ size = 'sm' }: UserAvatarProps) {
     <div 
       className={`${sizeClasses[size]} rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold overflow-hidden`}
     >
-      <img
+      <Image
         src="/avatars/avatar.png"
         alt="User Avatar"
+        width={size === 'sm' ? 32 : size === 'md' ? 48 : 64}
+        height={size === 'sm' ? 32 : size === 'md' ? 48 : 64}
         className="w-full h-full object-cover"
         onError={(e) => {
           e.currentTarget.src = '';

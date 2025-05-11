@@ -106,7 +106,7 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
           <SheetContent side="left" className="bg-zinc-900 border-zinc-800 text-white p-0 w-[250px] max-w-[200px]">
             <div className="p-3 border-b border-zinc-800">
               <Link href="/" className="block max-w-[130px]">
-                <img
+                <Image
                   src="/logo/patara-logo.png"
                   alt="Patara Logo"
                   width={150}
@@ -129,7 +129,7 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
       >
         <div className="p-3 border-b border-zinc-800">
           <Link href="/" className="block max-w-[100px]">
-            <img
+            <Image
               src="/logo/patara-favicon.png"
               alt="Patara Logo"
               width={40}
