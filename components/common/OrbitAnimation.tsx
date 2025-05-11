@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 
@@ -16,6 +16,8 @@ const platformIcons = [
 ];
 
 export function OrbitAnimation() {
+  const [imageError, setImageError] = useState(false);
+  
   return (
     <div className="relative w-64 h-64">
       {/* Orbital rings with flowing animation */}
@@ -46,20 +48,21 @@ export function OrbitAnimation() {
 
       {/* Center Patara logo */}
       <div className="absolute w-16 h-16 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center z-50">
-        <Image 
-          src="/patara-logo.png" 
-          alt="Patara" 
-          width={64} 
-          height={64}
-          onError={(e) => {
-            // Fallback if image fails to load
-            const target = e.target as HTMLElement;
-            target.outerHTML = `<div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-2xl">P</div>`;
-          }}
-        />
+        {!imageError ? (
+          <Image 
+            src="/images/patara-logo.png" 
+            alt="Patara" 
+            width={64} 
+            height={64}
+            onError={() => setImageError(true)}
+          />
+        ) : (
+          <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-500 rounded-full flex items-center justify-center text-white font-bold text-2xl">
+            P
+          </div>
+        )}
       </div>
 
-      {/* Static icons with color transitions */}
       {platformIcons.map((icon, index) => (
         <div
           key={icon.id}

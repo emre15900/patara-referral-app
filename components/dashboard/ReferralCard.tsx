@@ -17,21 +17,27 @@ export function ReferralCard() {
       } else {
         const textArea = document.createElement("textarea");
         textArea.value = referralLink;
-        textArea.style.position = "fixed"; 
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
         
+        let success = false;
         try {
-          document.execCommand('copy');
+          success = document.execCommand('copy');
         } catch (err) {
           console.error("Fallback: Copy failed", err);
-          toast.error("Copy failed");
-          document.body.removeChild(textArea);
-          return;
         }
         
         document.body.removeChild(textArea);
+        
+        if (!success) {
+          toast.error("Copy failed");
+          return;
+        }
       }
       
       setIsCopied(true);
@@ -52,8 +58,12 @@ export function ReferralCard() {
           url: referralLink,
         });
         toast.success("Thanks for sharing!");
-      } catch (error) {
-        toast.error("Something went wrong with sharing");
+      } catch (error: any) {
+        console.error("Sharing failed:", error);
+        if (error.name !== 'AbortError') {
+          copyToClipboard();
+          toast.info("Sharing failed. Link copied instead!");
+        }
       }
     } else {
       copyToClipboard();

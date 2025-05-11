@@ -62,7 +62,7 @@ export function Header() {
         </nav>
       </div>
 
-      <header className="border-b border-zinc-800 sticky top-0 z-20 bg-black/70 backdrop-blur-sm">
+      <header className="border-b border-zinc-800 sticky top-0 z-100 bg-black/70 backdrop-blur-sm">
         <div className="container max-w-screen-xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button 
