@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
 import Image from "next/image";
 
 const menuItems = [
@@ -66,91 +65,88 @@ const menuItems = [
   },
 ];
 
-export function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
+interface SidebarProps {
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   const pathname = usePathname();
+
+  const renderNavItems = () => (
+    <ul className="space-y-2">
+      {menuItems.map((item) => (
+        <li key={item.path}>
+          <Link
+            href={item.path}
+            className={`flex items-center gap-3 px-2 py-2 rounded-md text-sm font-medium transition-colors ${
+              pathname === item.path
+                ? "bg-zinc-800 text-white"
+                : "text-zinc-400 hover:text-white hover:bg-zinc-800/50"
+            }`}
+            onClick={() => setIsOpen(false)}
+          >
+            {item.icon}
+            <span>{item.name}</span>
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
 
   return (
     <>
-      {/* Mobile Sidebar */}
-      <Sheet open={isOpen} onOpenChange={setIsOpen}>
-        <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="p-2 -ml-2 md:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
-              <line x1="4" x2="20" y1="12" y2="12" />
-              <line x1="4" x2="20" y1="6" y2="6" />
-              <line x1="4" x2="20" y1="18" y2="18" />
-            </svg>
-          </Button>
-        </SheetTrigger>
-        <SheetContent side="left" className="bg-zinc-900 border-zinc-800 text-white p-0">
-          <div className="p-4 border-b border-zinc-800">
-            <a href="/" className="flex items-center gap-2">
-              <div className="w-10 h-10">
-                <Image
-                  src="/logo/patara-logo.png"
-                  alt="Patara Logo"
-                  width={40}
-                  height={40}
-                  priority
-                />
-              </div>
-              <span className="font-bold text-xl">patara</span>
-            </a>
-          </div>
-          <nav className="p-4 flex-1">
-            <ul className="space-y-2">
-              {menuItems.map((item) => (
-                <li key={item.path}>
-                  <Link
-                    href={item.path}
-                    className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors ${pathname === item.path
-                      ? "bg-zinc-800 text-white"
-                      : "text-zinc-400 hover:text-white hover:bg-zinc-800/50"
-                      }`}
-                    onClick={() => setIsOpen(false)}
-                  >
-                    {item.icon}
-                    <span>{item.name}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </SheetContent>
-      </Sheet>
+      <div className="md:hidden">
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
+          <SheetContent side="left" className="bg-zinc-900 border-zinc-800 text-white p-0 w-[250px] max-w-[200px]">
+            <div className="p-3 border-b border-zinc-800">
+              <a href="/" className="flex items-center gap-2">
+                <div className="w-8 h-8">
+                  <Image
+                    src="/logo/patara-logo.png"
+                    alt="Patara Logo"
+                    width={32}
+                    height={32}
+                    priority
+                  />
+                </div>
+                <span className="font-bold text-lg">patara</span>
+              </a>
+            </div>
+            <nav className="p-3 flex-1">
+              {renderNavItems()}
+            </nav>
+          </SheetContent>
+        </Sheet>
+      </div>
 
-      {/* Desktop Sidebar */}
-      <div className="hidden md:flex w-64 flex-col h-screen bg-zinc-900 border-r border-zinc-800 sticky top-0">
-        <div className="p-4 border-b border-zinc-800">
-          <Link href="/" className="block max-w-[150px]">
+      <div 
+        className={`hidden md:block fixed left-0 top-0 h-screen bg-zinc-900 border-r border-zinc-800 transform transition-transform duration-300 ${
+          isOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+        style={{ width: "200px", maxWidth: "200px" }}
+      >
+        <div className="p-3 border-b border-zinc-800">
+          <Link href="/" className="block max-w-[100px]">
             <img
               src="/logo/patara-favicon.png"
               alt="Patara Logo"
-              width={50}
-              height={40}
+              width={40}
+              height={30}
             />
           </Link>
         </div>
-        <nav className="p-4 flex-1">
-          <ul className="space-y-2">
-            {menuItems.map((item) => (
-              <li key={item.path}>
-                <Link
-                  href={item.path}
-                  className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors ${pathname === item.path
-                    ? "bg-zinc-800 text-white"
-                    : "text-zinc-400 hover:text-white hover:bg-zinc-800/50"
-                    }`}
-                >
-                  {item.icon}
-                  <span>{item.name}</span>
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <nav className="p-3 flex-1">
+          {renderNavItems()}
         </nav>
       </div>
+      
+      <div 
+        className={`hidden md:block fixed inset-0 bg-black/50 z-10 transition-opacity duration-300 ${
+          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`} 
+        onClick={() => setIsOpen(false)}
+      />
     </>
   );
 }

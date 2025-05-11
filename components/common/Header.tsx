@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SearchBar } from '@/components/common/SearchBar';
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 
 const NotificationsDropdown = dynamic(
   () => import('@/components/common/HeaderDropdowns').then(mod => mod.NotificationsDropdown),
@@ -21,9 +21,12 @@ const UserDropdown = dynamic(
   { ssr: false }
 );
 
-export function Header() {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+interface HeaderProps {
+  sidebarOpen: boolean;
+  setSidebarOpen: Dispatch<SetStateAction<boolean>>;
+}
 
+export function Header({ sidebarOpen, setSidebarOpen }: HeaderProps) {
   return (
     <>
       <div className={`fixed inset-0 bg-black/80 backdrop-blur-sm z-30 lg:hidden transition-opacity duration-300 ${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setSidebarOpen(false)} />
@@ -33,7 +36,7 @@ export function Header() {
           <div className="flex items-center gap-4">
             <button 
               className="p-2 text-white bg-zinc-800 rounded-md hover:bg-zinc-700 flex items-center justify-center" 
-              onClick={() => setSidebarOpen(true)}
+              onClick={() => setSidebarOpen(!sidebarOpen)}
               aria-label="Open menu"
               style={{ minWidth: '40px', minHeight: '40px' }}
             >
