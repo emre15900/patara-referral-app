@@ -4,46 +4,28 @@ import { Button } from '@/components/ui/button';
 import { SearchBar } from '@/components/SearchBar';
 import { ReferralCard } from '@/components/dashboard/ReferralCard';
 import { StatsCards } from '@/components/dashboard/StatsCards';
-import { FilterableEarningsTable } from '@/components/dashboard/FilterableEarningsTable';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Sidebar } from '@/components/Sidebar';
-import { NotificationsDropdown, SettingsDropdown, UserDropdown } from '@/components/HeaderDropdowns';
 import { BackgroundAnimation } from '@/components/BackgroundAnimation';
+import { Header } from '@/components/Header';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+
+const FilterableEarningsTable = dynamic(
+  () => import('@/components/dashboard/FilterableEarningsTable').then(mod => mod.FilterableEarningsTable),
+  { ssr: false }
+);
 
 export default function Dashboard() {
   const [activePeriod, setActivePeriod] = useState('all');
 
   return (
     <div className="min-h-screen bg-black text-white flex">
-      <BackgroundAnimation />
 
       <Sidebar />
 
       <div className="flex-1 relative z-10">
-        <header className="border-b border-zinc-800 sticky top-0 z-20 bg-black/70 backdrop-blur-sm">
-          <div className="container max-w-screen-xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
-            <div className="flex items-center gap-4 md:hidden">
-              <Link href="/">
-                <div className="max-w-[150px]">
-                  <img
-                    src="/images/patara-logo.png"
-                    alt="Patara Logo"
-                    width="100%"
-                  />
-                </div>
-              </Link>
-            </div>
-
-            <SearchBar />
-
-            <div className="flex items-center gap-4">
-              <NotificationsDropdown />
-              <SettingsDropdown />
-              <UserDropdown />
-            </div>
-          </div>
-        </header>
+        <Header />
 
         <main className="container max-w-screen-xl mx-auto px-4 sm:px-6 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
