@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { OrbitAnimation } from '@/components/OrbitAnimation';
+import { OrbitAnimation } from '@/components/common/OrbitAnimation';
 import { toast } from 'sonner';
 
 export function ReferralCard() {

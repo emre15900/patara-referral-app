@@ -1,21 +1,23 @@
+"use client";
+
 import Link from 'next/link';
 import Image from 'next/image';
-import { SearchBar } from '@/components/SearchBar';
+import { SearchBar } from '@/components/common/SearchBar';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
 const NotificationsDropdown = dynamic(
-  () => import('@/components/HeaderDropdowns').then(mod => mod.NotificationsDropdown),
+  () => import('@/components/common/HeaderDropdowns').then(mod => mod.NotificationsDropdown),
   { ssr: false }
 );
 
 const SettingsDropdown = dynamic(
-  () => import('@/components/HeaderDropdowns').then(mod => mod.SettingsDropdown),
+  () => import('@/components/common/HeaderDropdowns').then(mod => mod.SettingsDropdown),
   { ssr: false }
 );
 
 const UserDropdown = dynamic(
-  () => import('@/components/HeaderDropdowns').then(mod => mod.UserDropdown),
+  () => import('@/components/common/HeaderDropdowns').then(mod => mod.UserDropdown),
   { ssr: false }
 );
 
@@ -98,4 +100,4 @@ export function Header() {
       </header>
     </>
   );
-} 
+}
