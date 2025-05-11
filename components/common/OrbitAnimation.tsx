@@ -16,16 +16,47 @@ const generateCircularPositions = (count: number) => {
 const positions = generateCircularPositions(8);
 
 const platformIcons = [
-  { id: 'P', gradient: 'from-[#FF8A80] via-[#FF4081] to-[#F50057]', position: positions[0] },
-  { id: 'M', gradient: 'from-[#FFEA00] via-[#FFD600] to-[#FFC400]', position: positions[1] },
-  { id: 'F', gradient: 'from-[#B9F6CA] via-[#69F0AE] to-[#00E676]', position: positions[2] },
-  { id: 'S', gradient: 'from-[#EA80FC] via-[#E040FB] to-[#9C27B0]', position: positions[3] },
-  { id: 'G', gradient: 'from-[#FFD740] via-[#FFC400] to-[#FFAB00]', position: positions[4] },
-  { id: 'C', gradient: 'from-[#FF80AB] via-[#FF4081] to-[#F50057]', position: positions[5] },
-  { id: 'W', gradient: 'from-[#84FFFF] via-[#18FFFF] to-[#00B0FF]', position: positions[6] },
-  { id: 'A', gradient: 'from-[#FFD180] via-[#FFB300] to-[#FFAB00]', position: positions[7] },
+  {
+    id: 'P',
+    gradient: 'linear-gradient(174deg, #FFD1DC 0%, #FFE2D4 25%, #FFF9E0 50%, #E4F7F2 75%, #D4EBF4 100%)',
+    position: positions[0],
+  },
+  {
+    id: 'M',
+    gradient: 'linear-gradient(174deg, #FEF9C3 0%, #FDFDE1 25%, #E2F0CB 50%, #D9F0C8 75%, #CCE8B4 100%)',
+    position: positions[1],
+  },
+  {
+    id: 'F',
+    gradient: 'linear-gradient(174deg, #E1F5FE 0%, #B3E5FC 25%, #81D4FA 50%, #ACE9F9 75%, #E0F7FA 100%)',
+    position: positions[2],
+  },
+  {
+    id: 'S',
+    gradient: 'linear-gradient(174deg, #FCE4EC 0%, #F8BBD0 25%, #F3A6C6 50%, #EDD0DF 75%, #E8D4E8 100%)',
+    position: positions[3],
+  },
+  {
+    id: 'G',
+    gradient: 'linear-gradient(174deg, #F1F8E9 0%, #DCEDC8 25%, #C5E1A5 50%, #AED581 75%, #A5D6A7 100%)',
+    position: positions[4],
+  },
+  {
+    id: 'C',
+    gradient: 'linear-gradient(174deg, #F3E5F5 0%, #E1BEE7 25%, #CE93D8 50%, #BA68C8 75%, #B39DDB 100%)',
+    position: positions[5],
+  },
+  {
+    id: 'W',
+    gradient: 'linear-gradient(174deg, #E0F7FA 0%, #B2EBF2 25%, #80DEEA 50%, #4DD0E1 75%, #26C6DA 100%)',
+    position: positions[6],
+  },
+  {
+    id: 'A',
+    gradient: 'linear-gradient(174deg, #FFF3E0 0%, #FFE0B2 25%, #FFD180 50%, #FFCC80 75%, #FFB74D 100%)',
+    position: positions[7],
+  },
 ];
-
 
 export function OrbitAnimation() {
   const [imageError, setImageError] = useState(false);
@@ -97,8 +128,8 @@ export function OrbitAnimation() {
           <Image
             src="/images/orbit-logo.png"
             alt="Patara"
-            width={64}
-            height={64}
+            width={72}
+            height={72}
             onError={() => setImageError(true)}
           />
         ) : (
@@ -112,13 +143,14 @@ export function OrbitAnimation() {
         <div
           key={icon.id}
           className={`
-      absolute w-10 h-10 rounded-full bg-gradient-to-br ${icon.gradient}
+      absolute w-10 h-10 rounded-full
       flex items-center justify-center text-black font-medium shadow-lg z-40
     `}
           style={{
             left: `${icon.position.x}%`,
             top: `${icon.position.y}%`,
             transform: 'translate(-50%, -50%)',
+            background: icon.gradient,
           }}
         >
           <motion.span
