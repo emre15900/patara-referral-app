@@ -4,8 +4,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SearchBar } from '@/components/common/SearchBar';
 import dynamic from 'next/dynamic';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
+import { usePathname } from 'next/navigation';
 
 const NotificationsDropdown = dynamic(
   () => import('@/components/common/HeaderDropdowns').then(mod => mod.NotificationsDropdown),
@@ -38,6 +39,23 @@ export function Header({
   const sidebarOpen = propSidebarOpen !== undefined ? propSidebarOpen : localSidebarOpen;
   const setSidebarOpen = propSetSidebarOpen || setLocalSidebarOpen;
 
+  const [isResponsive, setIsResponsive] = useState(false);
+  const pathname = usePathname();
+
+  const handleResize = () => {
+    setIsResponsive(window.innerWidth < 978);
+  };
+
+  useEffect(() => {
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    handleResize();
+  }, [pathname]);
+
   const handleSidebarToggle = () => {
     setSidebarOpen(!sidebarOpen);
   };
@@ -65,13 +83,22 @@ export function Header({
             }
 
             <Link href="/" className="block max-w-[150px]">
-              <Image
-                src="/logo/patara-logo.png"
-                alt="Patara Logo"
-                width={150}
-                height={40}
-                style={{ width: '100%', height: 'auto' }}
-              />
+              {isResponsive && pathname === '/dashboard' ? (
+                <Image
+                  src="/logo/patara-favicon.png"
+                  alt="Patara Logo"
+                  width={40}
+                  height={40}
+                />
+              ) : (
+                <Image
+                  src="/logo/patara-logo.png"
+                  alt="Patara Logo"
+                  width={150}
+                  height={40}
+                  style={{ width: '100%', height: 'auto' }}
+                />
+              )}
             </Link>
           </div>
 
