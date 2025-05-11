@@ -28,9 +28,11 @@ export default function Dashboard() {
         <header className="border-b border-zinc-800 sticky top-0 z-20 bg-black/70 backdrop-blur-sm">
           <div className="container max-w-screen-xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between">
             <div className="flex items-center gap-4 md:hidden">
-              <Link href="/" className="flex items-center gap-2">
-                <div className="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold">P</div>
-                <span className="font-bold text-xl">patara</span>
+              <Link href="/" passHref legacyBehavior>
+                <a className="flex items-center gap-2">
+                  <div className="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold">P</div>
+                  <span className="font-bold text-xl">patara</span>
+                </a>
               </Link>
             </div>
             

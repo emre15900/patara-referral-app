@@ -84,9 +84,11 @@ export function Sidebar() {
         </SheetTrigger>
         <SheetContent side="left" className="bg-zinc-900 border-zinc-800 text-white p-0">
           <div className="p-4 border-b border-zinc-800">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold">P</div>
-              <span className="font-bold text-xl">patara</span>
+            <Link href="/" passHref legacyBehavior>
+              <a className="flex items-center gap-2">
+                <div className="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold">P</div>
+                <span className="font-bold text-xl">patara</span>
+              </a>
             </Link>
           </div>
           <nav className="p-4 flex-1">
@@ -115,9 +117,11 @@ export function Sidebar() {
       {/* Desktop Sidebar */}
       <div className="hidden md:flex w-64 flex-col h-screen bg-zinc-900 border-r border-zinc-800 sticky top-0">
         <div className="p-4 border-b border-zinc-800">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold">P</div>
-            <span className="font-bold text-xl">patara</span>
+          <Link href="/" passHref legacyBehavior>
+            <a className="flex items-center gap-2">
+              <div className="bg-blue-500 rounded-full w-8 h-8 flex items-center justify-center text-white font-bold">P</div>
+              <span className="font-bold text-xl">patara</span>
+            </a>
           </Link>
         </div>
         <nav className="p-4 flex-1">
