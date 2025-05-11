@@ -79,11 +79,10 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         <li key={item.path}>
           <Link
             href={item.path}
-            className={`flex items-center gap-3 px-2 py-2 rounded-md text-sm font-medium transition-colors ${
-              pathname === item.path
+            className={`flex items-center gap-3 px-2 py-2 rounded-md text-sm font-medium transition-colors ${pathname === item.path
                 ? "bg-zinc-800 text-white"
                 : "text-zinc-400 hover:text-white hover:bg-zinc-800/50"
-            }`}
+              }`}
             onClick={() => setIsOpen(false)}
           >
             {item.icon}
@@ -100,18 +99,15 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetContent side="left" className="bg-zinc-900 border-zinc-800 text-white p-0 w-[250px] max-w-[200px]">
             <div className="p-3 border-b border-zinc-800">
-              <a href="/" className="flex items-center gap-2">
-                <div className="w-8 h-8">
-                  <Image
-                    src="/logo/patara-logo.png"
-                    alt="Patara Logo"
-                    width={32}
-                    height={32}
-                    priority
-                  />
-                </div>
-                <span className="font-bold text-lg">patara</span>
-              </a>
+              <Link href="/" className="block max-w-[130px]">
+                <img
+                  src="/logo/patara-logo.png"
+                  alt="Patara Logo"
+                  width={150}
+                  height={40}
+                  style={{ width: '100%', height: 'auto' }}
+                />
+              </Link>
             </div>
             <nav className="p-3 flex-1">
               {renderNavItems()}
@@ -120,11 +116,10 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         </Sheet>
       </div>
 
-      <div 
-        className={`hidden md:block fixed left-0 top-0 h-screen bg-zinc-900 border-r border-zinc-800 transform transition-transform duration-300 ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
-        style={{ width: "200px", maxWidth: "200px" }}
+      <div
+        className={`hidden md:block fixed left-0 top-0 h-screen bg-zinc-900 border-r border-zinc-800 transform transition-transform duration-300 z-50 ${isOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}
+        style={{ width: "250px", maxWidth: "250px" }}
       >
         <div className="p-3 border-b border-zinc-800">
           <Link href="/" className="block max-w-[100px]">
@@ -140,11 +135,10 @@ export function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
           {renderNavItems()}
         </nav>
       </div>
-      
-      <div 
-        className={`hidden md:block fixed inset-0 bg-black/50 z-10 transition-opacity duration-300 ${
-          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`} 
+
+      <div
+        className={`hidden md:block fixed inset-0 bg-black/20 z-40 transition-opacity duration-300 ${isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}
         onClick={() => setIsOpen(false)}
       />
     </>

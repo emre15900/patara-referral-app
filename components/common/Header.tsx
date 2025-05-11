@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { SearchBar } from '@/components/common/SearchBar';
 import dynamic from 'next/dynamic';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 const NotificationsDropdown = dynamic(
   () => import('@/components/common/HeaderDropdowns').then(mod => mod.NotificationsDropdown),
@@ -22,11 +22,20 @@ const UserDropdown = dynamic(
 );
 
 interface HeaderProps {
-  sidebarOpen: boolean;
-  setSidebarOpen: Dispatch<SetStateAction<boolean>>;
+  sidebarOpen?: boolean;
+  setSidebarOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
-export function Header({ sidebarOpen, setSidebarOpen }: HeaderProps) {
+export function Header({ sidebarOpen: propSidebarOpen, setSidebarOpen: propSetSidebarOpen }: HeaderProps) {
+  const [localSidebarOpen, setLocalSidebarOpen] = useState(false);
+  
+  const sidebarOpen = propSidebarOpen !== undefined ? propSidebarOpen : localSidebarOpen;
+  const setSidebarOpen = propSetSidebarOpen || setLocalSidebarOpen;
+  
+  const handleSidebarToggle = () => {
+    setSidebarOpen(!sidebarOpen);
+  };
+
   return (
     <>
       <div className={`fixed inset-0 bg-black/80 backdrop-blur-sm z-30 lg:hidden transition-opacity duration-300 ${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setSidebarOpen(false)} />
@@ -36,7 +45,7 @@ export function Header({ sidebarOpen, setSidebarOpen }: HeaderProps) {
           <div className="flex items-center gap-4">
             <button 
               className="p-2 text-white bg-zinc-800 rounded-md hover:bg-zinc-700 flex items-center justify-center" 
-              onClick={() => setSidebarOpen(!sidebarOpen)}
+              onClick={handleSidebarToggle}
               aria-label="Open menu"
               style={{ minWidth: '40px', minHeight: '40px' }}
             >
