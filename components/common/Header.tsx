@@ -46,7 +46,7 @@ export function Header({
     <>
       <div className={`fixed inset-0 bg-black/80 backdrop-blur-sm z-30 lg:hidden transition-opacity duration-300 ${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setSidebarOpen(false)} />
 
-      <header className="border-b border-zinc-800 sticky top-0 z-100 bg-black/70 backdrop-blur-sm">
+      <header className="border-b border-zinc-800 sticky top-0 z-[9999] bg-black/70 backdrop-blur-sm">
         <div className="container-fluid mx-auto sm:px-6 py-3 flex items-center justify-between">
           <div className="flex items-center gap-4">
             {
