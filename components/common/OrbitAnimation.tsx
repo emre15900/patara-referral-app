@@ -71,7 +71,7 @@ export function OrbitAnimation() {
         animate={{ backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'] }}
         transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-900/5 via-transparent to-transparent" />
       </motion.div>
 
       <div className="absolute inset-0">
@@ -114,7 +114,7 @@ export function OrbitAnimation() {
             }}
           >
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-cyan-900/5 via-blue-900/5 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-cyan-900/30 via-blue-900/10 to-transparent"
               style={{ backgroundSize: '200% 200%' }}
               animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
               transition={{ duration: 15 + i * 3, repeat: Infinity, ease: 'linear' }}

@@ -6,7 +6,7 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <AuthLayout>
-      <div className="max-w-md w-full bg-zinc-900/60 backdrop-blur-sm p-12 rounded-2xl border border-zinc-800 shadow-xl z-10">
+      <div className="max-w-md w-full bg-[#181818] backdrop-blur-sm p-12 rounded-2xl border border-zinc-800 shadow-xl z-10">
         <div className="flex flex-col items-center text-center">
           <div className="mb-10 relative">
             <OrbitAnimation />
