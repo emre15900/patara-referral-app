@@ -25,8 +25,6 @@ Patara is a blockchain-based referral platform that allows users to earn cryptoc
 
 ## 🖼️ Screenshots
 
-To add the screenshots to this README, save the images in the `public/screenshots` directory and update the paths below:
-
 ### User Dashboard
 ![User Dashboard](public/screenshots/dashboard.png)
 
