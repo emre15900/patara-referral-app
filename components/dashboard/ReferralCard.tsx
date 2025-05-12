@@ -116,7 +116,7 @@ export function ReferralCard() {
             </div>
           </div>
 
-          <div className="w-full w-auto flex-shrink-0 px-8">
+          <div className="flex-shrink-0 px-8">
             <OrbitAnimation />
           </div>
         </div>
